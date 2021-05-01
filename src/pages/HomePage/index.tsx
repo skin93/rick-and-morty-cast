@@ -20,7 +20,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <CharacterList characters={characters}/>
+      <CharacterList characters={characters} />
     </div>
   );
 };

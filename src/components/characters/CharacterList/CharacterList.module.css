@@ -1,0 +1,23 @@
+.characters_wrapper {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  margin: 10px;
+}
+
+@media (min-width: 768px) {
+  .characters_wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .characters_wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1700px) {
+  .characters_wrapper {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

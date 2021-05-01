@@ -1,5 +1,7 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { ICharacter } from "../../../interfaces/ICharacter";
+import CharacterItem from "../CharacterItem";
+import styles from "./CharacterList.module.css";
 
 type Props = {
   characters: ICharacter[];
@@ -7,13 +9,11 @@ type Props = {
 
 const CharacterList = ({ characters }: Props) => {
   return (
-    <Fragment>
+    <div className={styles.characters_wrapper}>
       {characters.map((char) => (
-        <div key={char.id}>
-          <h3>{char.name}</h3>
-        </div>
+        <CharacterItem key={char.id} character={char} />
       ))}
-    </Fragment>
+    </div>
   );
 };
 
