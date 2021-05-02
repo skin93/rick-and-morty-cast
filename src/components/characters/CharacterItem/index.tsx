@@ -16,6 +16,9 @@ const CharacterItem = ({ character }: Props) => {
 
   return (
     <div className={styles.character_wrapper}>
+      <div className={styles.overlay}>
+        <button>Read more</button>
+      </div>
       <img
         className={styles.character_img}
         src={character.image}
