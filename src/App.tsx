@@ -8,7 +8,7 @@ import HomePage from "./pages/HomePage";
 function App() {
   return (
     <Router>
-      <TheHeader/>
+      <TheHeader />
       <main>
         <Switch>
           <Route path="/" exact>

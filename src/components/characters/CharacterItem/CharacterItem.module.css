@@ -35,6 +35,7 @@
 
 .overlay:hover > button {
   transform: translateY(0);
+  visibility: visible;
 }
 
 .overlay > button {
@@ -46,7 +47,8 @@
   font-size: 16px;
   cursor: pointer;
   transform: translateY(150px);
-  transition: transform 0.3s ease-in-out;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
   font-weight: 600;
   text-transform: uppercase;
 }
