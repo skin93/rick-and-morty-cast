@@ -1,0 +1,37 @@
+.nav__buttons {
+  width: 200px;
+  margin: 30px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.nav__buttons > button,
+.nav__buttons > span {
+  border: 2px solid #333;
+  border-radius: 10px;
+  background-color: transparent;
+  color: #333;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 0 10px;
+}
+
+.nav__buttons > button:disabled {
+  border-color: gray;
+  color: gray;
+}
+
+.nav__buttons > div {
+  border: 2px solid #333;
+  border-radius: 10px;
+  background-color: transparent;
+  color: #333;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+}

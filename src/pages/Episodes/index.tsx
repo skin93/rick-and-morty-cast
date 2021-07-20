@@ -1,29 +1,29 @@
 import axios from 'axios';
 import { useState, useEffect, useCallback } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import styles from './HomePage.module.css';
-import CharacterList from '../../components/characters/CharacterList';
-import { ICharacter } from '../../interfaces/ICharacter';
+import styles from './Episodes.module.css';
 import { IInfo } from '../../interfaces/IInfo';
 import Loading from '../../components/UI/Loading';
 import Error from '../../components/UI/Error';
+import { IEpisode } from '../../interfaces/IEpisode';
+import EpisodeList from '../../components/episodes/EpisodeList';
 
-const HomePage = () => {
+const Episodes = () => {
   const location = useLocation();
   const history = useHistory();
   const pageQuery = new URLSearchParams(location.search).get('page') || 1;
-  const [characters, setCharacters] = useState<ICharacter[]>([]);
+  const [episodes, setEpisodes] = useState<IEpisode[]>([]);
   const [info, setInfo] = useState<IInfo>();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const [pageNumber, setPageNumber] = useState(pageQuery);
 
-  const getCharacters = useCallback(async (url: string) => {
+  const getEpisodes = useCallback(async (url: string) => {
     try {
       setLoading(true);
       const { data } = await axios.get(url);
       setTimeout(() => {
-        setCharacters(data.results);
+        setEpisodes(data.results);
         setInfo(data.info);
         setLoading(false);
       }, 1000);
@@ -33,22 +33,20 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
-    getCharacters(
-      `https://rickandmortyapi.com/api/character?page=${pageQuery}`
-    );
-  }, [pageQuery, getCharacters]);
+    getEpisodes(`https://rickandmortyapi.com/api/episode?page=${pageQuery}`);
+  }, [pageQuery, getEpisodes]);
 
   if (loading) {
     return <Loading />;
   }
 
   if (error) {
-    return <Error errorMsg='Can not fetch characters :(' />;
+    return <Error errorMsg='Can not fetch episodes :(' />;
   }
 
   return (
     <>
-      <CharacterList characters={characters} />
+      <EpisodeList episodes={episodes} />
       {info && (
         <div className={styles.nav__buttons}>
           <button
@@ -90,4 +88,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Episodes;
