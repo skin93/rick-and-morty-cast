@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { ICharacter } from "../../../interfaces/ICharacter";
 import styles from "./CharacterItem.module.css";
 
@@ -17,7 +18,9 @@ const CharacterItem = ({ character }: Props) => {
   return (
     <div className={styles.character_wrapper}>
       <div className={styles.overlay}>
-        <button>Read more</button>
+        <Link to={`/characters/${character.id}`}>
+          <button>Read more </button>
+        </Link>
       </div>
       <img
         className={styles.character_img}
