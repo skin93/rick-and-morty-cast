@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { ICharacter } from '../../interfaces/ICharacter';
@@ -7,15 +8,15 @@ import Loading from '../../components/UI/Loading';
 import Error from '../../components/UI/Error';
 import Container from '../../components/layout/Container';
 
-interface IParam {
-  id: string;
-}
+import getEpisodeID from '../../lib/getEpisodeID';
+import { IParam } from '../../interfaces/IParam';
 
 const CharacterPage = () => {
   const { id } = useParams<IParam>();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const [character, setCharacter] = useState<ICharacter>();
+  const history = useHistory();
 
   const characterStatus =
     character?.status === 'Alive'
@@ -79,8 +80,13 @@ const CharacterPage = () => {
             <h3>Episodes that character appeared</h3>
             <div className={styles.episodes__container}>
               {character.episode.map((item, index) => (
-                <div key={index} className={styles.episodes__item}>
-                  {item.split('https://rickandmortyapi.com/api/episode/')[1]}
+                <div
+                  onClick={() =>
+                    history.push(`/episodes/${getEpisodeID(item)}`)
+                  }
+                  key={index}
+                  className={styles.episodes__item}>
+                  {getEpisodeID(item)}
                 </div>
               ))}
             </div>
