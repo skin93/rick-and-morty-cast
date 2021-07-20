@@ -1,27 +1,109 @@
 .character__page {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: block;
-  /* display: flex;
-  flex-direction: row; */
+  display: flex;
+  flex-direction: column;
+  background-color: var(--item-background);
+  border-radius: 10px;
 }
 
-.character__bio {
-  margin-left: 30px;
-  display: inline-block;
+.character__wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.character__image {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px 10px 0 0;
+}
+
+.character__body {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  color: #fff;
 }
 
 .character__name {
-  font-size: 2rem;
+  /* font-size: 1.5rem; */
+}
+
+.character__status,
+.character__info,
+.character__location {
+  margin-bottom: 20px;
+}
+
+.status__dot {
   display: inline-block;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
 }
 
-.episodes__container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+.character__status__alive {
+  background-color: rgb(66, 252, 66);
 }
 
-.episodes__item {
+.character__status__dead {
+  background-color: rgb(255, 0, 0);
+}
+
+.character__status__unknown {
+  background-color: rgb(219, 216, 216);
+}
+
+.character__last__location {
+  display: none;
+}
+
+.character__episodes {
+  display: flex;
+  flex-direction: column;
   padding: 10px;
+  color: #fff;
+  align-items: flex-start;
+  flex: 2;
+}
+
+.character__episodes .episodes__container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  justify-content: flex-start;
+}
+
+.character__episodes .episodes__container .episodes__item {
+  padding: 10px;
+  border: 1px solid #fff;
+}
+
+.character__episodes .episodes__container .episodes__item:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+@media only screen {
+  .character__wrapper {
+    flex-direction: column;
+  }
+
+  .character__body {
+    justify-content: center;
+  }
+}
+
+@media (min-width: 700px) {
+  .character__page {
+    flex-direction: row;
+    gap: 30px;
+    justify-content: space-between;
+  }
+
+  .character__last__location {
+    display: block;
+  }
 }

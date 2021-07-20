@@ -5,12 +5,24 @@ import { ICharacter } from '../../interfaces/ICharacter';
 import styles from './CharacterPage.module.css';
 import Loading from '../../components/UI/Loading';
 import Error from '../../components/UI/Error';
+import Container from '../../components/layout/Container';
+
+interface IParam {
+  id: string;
+}
 
 const CharacterPage = () => {
-  const { id } = useParams<any>();
+  const { id } = useParams<IParam>();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const [character, setCharacter] = useState<ICharacter>();
+
+  const characterStatus =
+    character?.status === 'Alive'
+      ? `${styles.character__status__alive} ${styles.status__dot}`
+      : character?.status === 'Dead'
+      ? `${styles.character__status__dead} ${styles.status__dot}`
+      : `${styles.character__status__unknown} ${styles.status__dot}`;
 
   const getCharacter = async (id: number): Promise<void> => {
     try {
@@ -28,7 +40,7 @@ const CharacterPage = () => {
   };
 
   useEffect(() => {
-    getCharacter(id);
+    getCharacter(parseInt(id));
   }, [id]);
 
   if (loading) {
@@ -40,29 +52,42 @@ const CharacterPage = () => {
   }
 
   return (
-    <>
+    <Container>
       {character && (
-        <div className={styles.character__page}>
-          <img
-            className={styles.character__image}
-            src={character.image}
-            alt={character.name}
-          />
-          <h3 className={styles.character__name}>{character.name}</h3>
-
-          <div className={styles.character__bio}>
-            <h4>List of episodes in which this character appeared</h4>
+        <section className={styles.character__page}>
+          <div className={styles.character__wrapper}>
+            <img
+              className={styles.character__image}
+              src={character.image}
+              alt={character.name}
+            />
+            <div className={styles.character__body}>
+              <h2 className={styles.character__name}>{character.name}</h2>
+              <div className={styles.character__status}>
+                <span className={characterStatus}></span> {character.status}
+              </div>
+              <h4 className={styles.character__info}>
+                {character.species} | {character.gender}
+              </h4>
+              <div className={styles.character__lastLocation}>
+                <p>Last known location:</p>
+                <h4>{character.location.name}</h4>
+              </div>
+            </div>
+          </div>
+          <div className={styles.character__episodes}>
+            <h3>Episodes that character appeared</h3>
             <div className={styles.episodes__container}>
-              {character.episode.map((e, index) => (
-                <div className={styles.episodes__item} key={index}>
-                  {e.split('episode')[1].split('/')[1]}
+              {character.episode.map((item, index) => (
+                <div key={index} className={styles.episodes__item}>
+                  {item.split('https://rickandmortyapi.com/api/episode/')[1]}
                 </div>
               ))}
             </div>
           </div>
-        </div>
+        </section>
       )}
-    </>
+    </Container>
   );
 };
 
